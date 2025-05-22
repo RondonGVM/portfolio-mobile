@@ -5,7 +5,7 @@ export default function Home({ navigation }) {
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Portfolio</Text>
 
-      <Image source={require('../assets/minha_foto.jpg')} style={styles.fotoMinha} />
+      <Image source={require('../../assets/minha_foto.jpg')} style={styles.fotoMinha} />
 
       <Text style={styles.subtitle}>Sobre Mim</Text>
       <Text style={styles.texto}>
@@ -15,18 +15,18 @@ export default function Home({ navigation }) {
 
       <Text style={styles.subtitle}>Competências</Text>
       <View style={styles.logosContainer}>
-        <Image source={require('../assets/mysql-logo.png')} style={styles.logo} />
-        <Image source={require('../assets/python-logo.png')} style={styles.logo} />
-        <Image source={require('../assets/JavaScript-logo.png')} style={styles.logo} />
+        <Image source={require('../../assets/mysql-logo.png')} style={styles.logo} />
+        <Image source={require('../../assets/python-logo.png')} style={styles.logo} />
+        <Image source={require('../../assets/JavaScript-logo.png')} style={styles.logo} />
       </View>
 
       <Text style={styles.subtitle}>Contato</Text>
       <View style={styles.iconesContatoContainer}>
         <TouchableOpacity onPress={() => Linking.openURL('mailto:rondongvm@gmail.com')}>
-          <Image source={require('../assets/email-icon.png')} style={styles.contatoIcon} />
+          <Image source={require('../../assets/email-icon.png')} style={styles.contatoIcon} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => Linking.openURL('https://github.com/RondonGVM')}>
-          <Image source={require('../assets/github-icon.png')} style={styles.contatoIcon} />
+          <Image source={require('../../assets/github-icon.png')} style={styles.contatoIcon} />
         </TouchableOpacity>
       </View>
 
