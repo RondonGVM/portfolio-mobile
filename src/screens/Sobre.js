@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: '#f4f4f4',
     justifyContent: 'flex-start',
-    alignItems: 'center',
+    alignItems: 'left',
     padding: 20,
   },
   title: {
