@@ -15,14 +15,14 @@ export default function Home({ navigation }) {
         style={styles.button} 
         onPress={() => navigation.navigate('Sobre')}
       >
-        <Text style={styles.buttonText}>About me</Text>
+        <Text style={styles.buttonText}>Sobre o app</Text>
       </TouchableOpacity>
 
       <TouchableOpacity 
         style={styles.button} 
         onPress={() => navigation.navigate('Projetos')}
       >
-        <Text style={styles.buttonText}>Projects</Text>
+        <Text style={styles.buttonText}>Projetos e Experiências Profissionais</Text>
       </TouchableOpacity>
       <TouchableOpacity 
         style={styles.button} 

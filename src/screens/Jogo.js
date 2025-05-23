@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, FlatList, StyleSheet, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { useState, useEffect } from 'react';
 
 const gerarNumeroSecreto = () => {
   let numeros = new Set();
@@ -10,22 +9,20 @@ const gerarNumeroSecreto = () => {
   return Array.from(numeros).join('');
 };
 
-const Jogo = () => {
+export default function Jogo() {
   const [numeroSecreto, setNumeroSecreto] = useState(gerarNumeroSecreto());
   const [palpite, setPalpite] = useState('');
   const [historico, setHistorico] = useState([]);
   const [jogoEncerrado, setJogoEncerrado] = useState(false);
   const [mensagem, setMensagem] = useState('');
 
-  const navigation = useNavigation();
-
   useEffect(() => {
-    console.log('Número secreto:', numeroSecreto);
+    console.log("Número secreto:", numeroSecreto);
   }, [numeroSecreto]);
 
   const verificarPalpite = () => {
     if (palpite.length !== 4 || new Set(palpite).size !== 4) {
-      Alert.alert('Erro', 'Digite um número de 4 dígitos únicos!');
+      alert("Digite um número de 4 dígitos únicos!");
       return;
     }
 
@@ -43,7 +40,7 @@ const Jogo = () => {
     setHistorico([`${palpite} - Bulls: ${bulls}, Cows: ${cows}`, ...historico]);
 
     if (bulls === 4) {
-      setMensagem('Parabéns! Você acertou o número!');
+      setMensagem("Parabéns! Você acertou o número!");
       setJogoEncerrado(true);
     }
 
@@ -51,7 +48,7 @@ const Jogo = () => {
   };
 
   const desistir = () => {
-    Alert.alert('Você desistiu!', `O número secreto era: ${numeroSecreto}`);
+    alert(`O número secreto era: ${numeroSecreto}`);
     setJogoEncerrado(true);
   };
 
@@ -64,8 +61,9 @@ const Jogo = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Bulls and Cows</Text>
+      <View style={styles.divisor} />
 
       {!jogoEncerrado && (
         <>
@@ -76,69 +74,84 @@ const Jogo = () => {
             maxLength={4}
             keyboardType="numeric"
             placeholder="Digite seu palpite"
+            placeholderTextColor="#888"
           />
-          <View style={styles.buttonContainer}>
-            <Button title="Enviar Palpite" onPress={verificarPalpite} />
-            <Button title="Desistir" onPress={desistir} color="red" />
-          </View>
+          <TouchableOpacity style={styles.button} onPress={verificarPalpite}>
+            <Text style={styles.buttonText}>Enviar Palpite</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.button, styles.desistir]} onPress={desistir}>
+            <Text style={styles.buttonText}>Desistir</Text>
+          </TouchableOpacity>
         </>
       )}
 
       {jogoEncerrado && (
-        <View>
-          <Text style={styles.message}>{mensagem}</Text>
-          <Button title="Jogar Novamente" onPress={jogarNovamente} />
-        </View>
+        <>
+          <Text style={styles.text}>{mensagem}</Text>
+          <TouchableOpacity style={styles.button} onPress={jogarNovamente}>
+            <Text style={styles.buttonText}>Jogar Novamente</Text>
+          </TouchableOpacity>
+        </>
       )}
 
-      <Text style={styles.subtitle}>Histórico:</Text>
-      <FlatList
-        data={historico}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => <Text style={styles.historyItem}>{item}</Text>}
-      />
-
-      <Button title="Voltar para Home" onPress={() => navigation.navigate('Home')} />
-    </View>
+      <Text style={styles.text}>Histórico:</Text>
+      {historico.map((item, index) => (
+        <Text key={index} style={styles.text}>{item}</Text>
+      ))}
+    </ScrollView>
   );
-};
-
-export default Jogo;
+}
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
+    flexGrow: 1,
+    backgroundColor: '#f4f4f4',
     justifyContent: 'flex-start',
+    alignItems: 'center',
+    padding: 20,
   },
   title: {
-    fontSize: 28,
+    fontSize: 80,
     fontWeight: 'bold',
     marginBottom: 20,
+  },
+  text: {
+    fontSize: 16,
+    marginBottom: 15,
+    lineHeight: 24,
+    textAlign: 'left',
+    fontWeight: 'bold',
+  },
+  divisor: {
+    borderBottomColor: '#000',
+    borderBottomWidth: 5,
+    marginVertical: 10,
+    marginBottom: 20, 
+    width: '100%',
   },
   input: {
+    width: '80%',
     borderWidth: 1,
-    borderColor: '#888',
+    borderColor: '#000',
+    borderRadius: 8,
     padding: 10,
-    marginBottom: 10,
-    borderRadius: 5,
-  },
-  buttonContainer: {
-    marginBottom: 20,
-  },
-  subtitle: {
-    fontSize: 20,
-    marginTop: 20,
-  },
-  historyItem: {
+    marginBottom: 15,
     fontSize: 16,
-    marginVertical: 2,
+    backgroundColor: '#fff',
   },
-  message: {
-    fontSize: 18,
+  button: {
+    backgroundColor: '#333',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    marginBottom: 10,
+  },
+  desistir: {
+    backgroundColor: '#ff4d4d',
+  },
+  buttonText: {
+    color: '#fff',
     fontWeight: 'bold',
-    marginVertical: 10,
-    color: 'green',
+    letterSpacing: 1,
   },
 });
