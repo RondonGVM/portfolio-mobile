@@ -30,6 +30,12 @@ export default function Home({ navigation }) {
       >
         <Text style={styles.buttonText}>Play bulls and cows</Text>
       </TouchableOpacity>
+       <TouchableOpacity 
+        style={styles.button} 
+        onPress={() => navigation.navigate('Experiencias')}
+      >
+        <Text style={styles.buttonText}>Experiencias</Text>
+      </TouchableOpacity>
     </View>
   );
 }
