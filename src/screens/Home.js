@@ -22,7 +22,7 @@ export default function Home({ navigation }) {
         style={styles.button} 
         onPress={() => navigation.navigate('Projetos')}
       >
-        <Text style={styles.buttonText}>Projetos e Experiências Profissionais</Text>
+        <Text style={styles.buttonText}>Projetos</Text>
       </TouchableOpacity>
       <TouchableOpacity 
         style={styles.button} 
