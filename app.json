@@ -24,6 +24,18 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "285a639f-7fdf-4f6a-8e47-1680ebd19d42"
+      }
+    },
+    "owner": "rondongvm",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/285a639f-7fdf-4f6a-8e47-1680ebd19d42"
     }
   }
 }
